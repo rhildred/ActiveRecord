@@ -43,7 +43,9 @@ var ActiveRecord = Class.extend({
 	implementFind: function(sMethod,sWhere, aBindVars, fCallBack){
 		$.getJSON("db", {
 			action : sMethod,
-			object : this.name
+			object : this.name,
+			where  : sWhere,
+			bindvars: aBindVars
 		}, fCallBack);
 	},
 	find: function(sWhere, aBindVars, fCallBack){
