@@ -31,10 +31,13 @@ if(file_exists('../../model/db.json')){
 }
 $db = NewADOConnection('mysql');
 if($_SERVER['SERVER_PORT'] == 8080){
-	$db->Connect($oConnections->devel->host, $oConnections->devel->uname, $oConnections->devel->passwd, $oConnections->devel->dbname);
+	$dbInfo = $oConnections->devel;
 }else{
-	$db->Connect($oConnections->prod->host, $oConnections->prod->uname, $oConnections->prod->passwd, $oConnections->prod->dbname);
+	$dbInfo = $oConnections->prod;
 }
+$sUname = 'ReadOnly';
+$sPasswd = $dbInfo->$sUname;
+$db->Connect($dbInfo->host, $sUname, $sPasswd, $dbInfo->dbname);
 
 ADOdb_Active_Record::SetDatabaseAdapter($db);
 

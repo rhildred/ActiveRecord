@@ -45,7 +45,7 @@ var ActiveRecord = Class.extend({
 			action : sMethod,
 			object : this.name,
 			where  : sWhere,
-			bindvars: aBindVars
+			bindvars: aBindVars.join(",")
 		}, fCallBack);
 	},
 	find: function(sWhere, aBindVars, fCallBack){

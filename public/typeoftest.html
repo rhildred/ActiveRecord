@@ -3,10 +3,13 @@
 	<body>
 		Hello World
 	</body>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="js/ActiveRecord.js"></script>
 	<script>
 		var Test = ActiveRecord.extend({constructor: function(){}, name: 'test'});		
 		var oTest = new Test();
-		alert('My Type is ' + oTest.describe());
+		oTest.load('lname = ?', ['Greaves'], function(){
+			alert('my firstname is ' + oTest.fname);
+		} );
 	</script>
 </html>
