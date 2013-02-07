@@ -10,7 +10,7 @@ if(file_exists('../../model/db.json')){
 }else{
 	$oConnections = new stdClass();
 	$oConnections->devel->host = 'localhost';
-	$oConnections->devel->dbname = 'test';
+	$oConnections->devel->dbname = 'ActiveRecord';
 	$oConnections->devel->ReadOnly = 'changeit';
 	$oConnections->devel->LoggedInReadOnly = 'changeit';
 	$oConnections->devel->AdminReadOnly = 'changeit';
