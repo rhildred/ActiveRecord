@@ -36,6 +36,43 @@ if($_SERVER['SERVER_PORT'] == 8080){
 	$dbInfo = $oConnections->prod;
 }
 $sUname = 'ReadOnly';
+
+if(array_key_exists('sguid', $_SESSION)){
+	$sGuid = $_SESSION['sguid'];
+	if(file_exists('../../model/users.json')){
+		$oUsers = json_decode(file_get_contents('../../model/users.json'));
+		if(isset($oUsers->$sGuid)){
+			$sSocial = $oUsers->$sGuid->socialid;
+			$oUser = $oUsers->$sSocial;
+			if($action == 'save'){
+				if($oUser->badmin){
+					$sUname = 'AdminUpdate';
+				}else{
+					$sUname = 'LoggedInUpdate';
+				}
+			}elseif($action == 'delete'){
+				if($oUser->badmin){
+					$sUname = 'AdminDelete';
+				}else{
+					$sUname = 'LoggedInDelete';
+				}				
+			}else{
+				if($oUser->badmin){
+					$sUname = 'AdminReadOnly';
+				}else{
+					$sUname = 'LoggedInReadOnly';
+				}
+			}
+		}
+		else{
+			if($action == 'save' || $action == 'delete'){
+				echo json_encode(array(error => "not authorized")) . "\n";	
+				return;			
+			}
+		}
+	}
+}
+
 $sPasswd = $dbInfo->$sUname;
 $db->Connect($dbInfo->host, $sUname, $sPasswd, $dbInfo->dbname);
 
@@ -77,20 +114,6 @@ switch ($action) {
 		break;
 	case 'save':
 	case 'delete':
-		$sGuid = FALSE;
-		if(array_key_exists('sguid', $_SESSION)){
-			$sGuid = $_SESSION['sguid'];
-			if(file_exists('../../model/users.json')){
-				$oUsers = json_decode(file_get_contents('../../model/users.json'));
-				if(!isset($oUsers->$sGuid)){
-					$sGuid = FALSE;
-				}
-			}
-		}
-		if(!$sGuid){
-			echo json_encode(array(error => "not authorized")) . "\n";	
-			break;		
-		}
 		$sObject = $_GET['object'];
 		eval('class ' . $sObject . ' extends ADOdb_Active_Record{}');
 		$oTemplate = new $sObject;

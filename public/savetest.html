@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		Hello World
+	</body>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="js/ActiveRecord.js"></script>
+	<script>
+		var Person = ActiveRecord.extend({constructor: function(){}, name: 'person'});		
+		var oTest = new Person();
+		oTest.lname = 'Mouse';
+		oTest.fname = 'Minny';
+		oTest.save(function(){
+			alert('my new id is ' + oTest.id);
+		} );
+	</script>
+</html>
