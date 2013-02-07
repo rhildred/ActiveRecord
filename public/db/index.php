@@ -10,13 +10,23 @@ if(file_exists('../../model/db.json')){
 }else{
 	$oConnections = new stdClass();
 	$oConnections->devel->host = 'localhost';
-	$oConnections->devel->uname = 'root';
-	$oConnections->devel->passwd = '';
 	$oConnections->devel->dbname = 'test';
+	$oConnections->devel->ReadOnly = 'changeit';
+	$oConnections->devel->LoggedInReadOnly = 'changeit';
+	$oConnections->devel->AdminReadOnly = 'changeit';
+	$oConnections->devel->LoggedInUpdate = 'changeit';
+	$oConnections->devel->AdminUpdate = 'changeit';
+	$oConnections->devel->LoggedInDelete = 'changeit';
+	$oConnections->devel->AdminDelete = 'changeit';
 	$oConnections->prod->host = 'localhost';
-	$oConnections->prod->uname = 'changeit';
-	$oConnections->prod->passwd = 'changeit';
 	$oConnections->prod->dbname = 'changeit';
+	$oConnections->prod->ReadOnly = 'changeit';
+	$oConnections->prod->LoggedInReadOnly = 'changeit';
+	$oConnections->prod->AdminReadOnly = 'changeit';
+	$oConnections->prod->LoggedInUpdate = 'changeit';
+	$oConnections->prod->AdminUpdate = 'changeit';
+	$oConnections->prod->LoggedInDelete = 'changeit';
+	$oConnections->prod->AdminDelete = 'changeit';
 	file_put_contents('../../model/db.json', json_encode($oConnections));
 }
 $db = NewADOConnection('mysql');
