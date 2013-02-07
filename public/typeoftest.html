@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		Hello World
+	</body>
+	<script src="js/ActiveRecord.js"></script>
+	<script>
+		var Test = ActiveRecord.extend({constructor: function(){}, name: 'test'});		
+		var oTest = new Test();
+		alert('My Type is ' + oTest.describe());
+	</script>
+</html>
