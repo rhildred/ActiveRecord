@@ -149,6 +149,9 @@ class ADODB_Active_Record {
 		if (!ADODB_Active_Record::$_changeNames) return $table;
 
 		$ut = strtoupper($table);
+		if($ut == 'PERSON'){
+			return 'people';
+		}
 		$len = strlen($table);
 		$lastc = $ut[$len-1];
 		$lastc2 = substr($ut,$len-2);

@@ -6,9 +6,9 @@
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="js/ActiveRecord.js"></script>
 	<script>
-		var Test = ActiveRecord.extend({constructor: function(){}, name: 'test'});		
-		var oTest = new Test();
-		oTest.load('lname = ?', ['Greaves'], function(){
+		var Person = ActiveRecord.extend({constructor: function(){}, name: 'person'});		
+		var oTest = new Person();
+		oTest.load('lname = ?', ['Hildred'], function(){
 			alert('my firstname is ' + oTest.fname);
 		} );
 	</script>
