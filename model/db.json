@@ -1,0 +1,1 @@
+{"devel":{"host":"localhost","uname":"root","passwd":"","dbname":"test1"},"prod":{"host":"localhost","uname":"changeit","passwd":"changeit","dbname":"changeit"}}
