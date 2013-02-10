@@ -134,30 +134,6 @@ switch ($action) {
 		}
 		echo json_encode($oTemplate)  . "\n";
 		break;
-	default:
-		if(array_key_exists('object', $_GET)){
-			$sObject = $_GET['object'];
-		}else{
-			$sObject = 'test';
-		}
-		eval('class ' . $sObject . ' extends ADOdb_Active_Record{}');
-		$oTemplate = new $sObject;
-		if(array_key_exists('bindvars', $_GET)){
-			$aResults = $oTemplate->find($_GET['where'], preg_split('/,/', $_GET['bindvars']));
-		}else{
-			$aResults = $oTemplate->find('1');
-		}
-		if($aResults){
-			foreach ($aResults as $oResult) {
-				echo '<div class="' . $sObject . '">';
-				foreach ($oResult as $key => $value) {
-					if(substr($key, 0, 1) != '_' && $key != 'lockMode' && $key != 'foreignName'){
-						echo '<span class="' . $key . '">' . $value . '</span>';
-					}
-				}
-				echo "</div>\n";
-			}
-		}
 }
 
 ?>
