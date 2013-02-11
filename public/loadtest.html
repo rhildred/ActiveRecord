@@ -6,10 +6,10 @@
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="js/ActiveRecord.js"></script>
 	<script>
-		var Person = ActiveRecord.extend({constructor: function(){}, name: 'person'});		
-		var oTest = new Person();
-		oTest.load('lname = ?', ['Hildred'], function(){
-			alert('my firstname is ' + oTest.fname);
+		var Author = ActiveRecord.extend({constructor: function(){}, name: 'author'});		
+		var oTest = new Author();
+		oTest.load('name = ?', ['Kelly Purdie'], function(){
+			alert('my Google Id is ' + oTest.id);
 		} );
 	</script>
 </html>

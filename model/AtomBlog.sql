@@ -14,7 +14,7 @@ CREATE  TABLE IF NOT EXISTS `AtomBlog`.`authors` (
   `id` VARCHAR(45) NOT NULL ,
   `name` VARCHAR(255) NULL ,
   `uri` VARCHAR(255) NULL ,
-  `badmin` CHAR(1) NOT NULL DEFAULT 'N',
+  `badmin` CHAR(1) DEFAULT 'N',
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -165,6 +165,8 @@ GRANT INSERT ON Comments TO LoggedInUpdate;
 GRANT SELECT ON Authors TO ReadOnly;
 GRANT SELECT ON Authors TO AdminReadOnly;
 GRANT SELECT ON Authors TO LoggedInReadOnly;
+GRANT SELECT ON Authors TO AdminUpdate;
+GRANT DELETE ON Authors TO AdminUpdate;
 GRANT UPDATE ON Authors TO AdminUpdate;
 GRANT INSERT ON Authors TO AdminUpdate;
 GRANT DELETE ON Authors TO AdminDelete;
