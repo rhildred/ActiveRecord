@@ -86,7 +86,9 @@ switch ($action) {
 		$oTemplate = new $sObject;
 		if(array_key_exists('bindvars', $_GET)){
 			$aResults = $oTemplate->find($_GET['where'], preg_split('/,/', $_GET['bindvars']));
-		}else{
+		}elseif (array_key_exists('where', $_GET)){
+			$aResults = $oTemplate->find($_GET['where']);
+		}else{	
 			$aResults = $oTemplate->find('1');
 		}
 		if(!$aResults){
@@ -110,7 +112,8 @@ switch ($action) {
 				$aRc = $aResults[0];				
 			}
 		}
-		echo json_encode($aRc) . "\n";
+		$sRC = json_encode($aRc) . "\n";
+		echo preg_replace( "/\"(\d+)\"/", '$1', $sRC );
 		break;
 	case 'save':
 	case 'delete':

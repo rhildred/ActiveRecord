@@ -41,20 +41,28 @@ var ActiveRecord = Class.extend({
     	this.name = this.name || typeof this;
     },
 	implementFind: function(sMethod,sWhere, aBindVars, fCallBack){
-		$.getJSON("db", {
+		var oQuery = {
 			action : sMethod,
-			object : this.name,
-			where  : sWhere,
-			bindvars: aBindVars.join(",")
-		}, fCallBack);
+			object : this.name			
+		};
+		if(sWhere){
+			oQuery.where = sWhere;
+		}
+		if(aBindVars){
+			oQuery.bindvars = aBindVars.join(","); 
+		}
+		$.getJSON("db", oQuery, fCallBack);
 	},
 	find: function(sWhere, aBindVars, fCallBack){
 		var that = this;
 		this.implementFind('find', sWhere, aBindVars, function(data){
 			var aRc = new Array();
 			$.each(data.items, function(i, item) {
-				item.name = that.name;
-				aRc.push((new (ActiveRecord.extend(item))));
+				var oRC = new (ActiveRecord.extend(that));
+				oRC.__proto__ = that.__proto__;
+				$.each(item, function(key, value){ oRC[key] = value});
+				oRC.constructor(item);
+				aRc.push(oRC);
 			});
 			fCallBack.call(that, aRc);
 		});
